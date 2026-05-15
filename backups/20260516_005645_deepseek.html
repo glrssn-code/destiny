@@ -83,7 +83,6 @@
         .btn-danger { border-color:#c0392b; color:#e74c3c; }
         .btn-success { border-color:#27ae60; color:#2ecc71; }
         .btn-exit { border-color:#e67e22; color:#e67e22; font-weight:bold; background:linear-gradient(180deg,#5a3a1a,#3a2010); }
-        .btn-stats { border-color:#3498db; color:#3498db; font-weight:bold; background:linear-gradient(180deg,#2a4a5a,#1a2a3a); }
         .bottom-bar { grid-area:bottom-bar; background:linear-gradient(0deg,#1e1810,#221d14); border-top:2px solid var(--border-gold); display:flex; align-items:center; padding:0 15px; gap:10px; box-shadow:0 -2px 8px rgba(0,0,0,0.5); z-index:10; }
         .coords-display { color:var(--text-secondary); font-size:11px; padding:4px 8px; border:1px solid var(--border-gold-dark); border-radius:3px; background:rgba(0,0,0,0.25); min-width:130px; text-align:center; }
         .map-area { grid-area:map-area; position:relative; overflow:hidden; background:#0a0907; cursor:grab; z-index:5; }
@@ -99,38 +98,6 @@
         #imageFileInput, #backupFileInput { display:none; }
         .overall-stats { color:var(--text-primary); font-size:11px; line-height:1.6; }
         .overall-stats .stat-row { display:flex; justify-content:space-between; margin:3px 0; }
-        /* 数据展示弹窗样式 */
-        .data-modal-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:3000; display:flex; align-items:center; justify-content:center; }
-        .data-modal { background:linear-gradient(180deg,#252015,#1a1510); border:2px solid var(--border-gold); border-radius:8px; padding:20px; width:90%; max-width:900px; max-height:90vh; overflow-y:auto; color:var(--text-primary); font-family:inherit; }
-        .data-modal h2 { color:var(--accent); text-align:center; margin-bottom:15px; letter-spacing:3px; font-size:18px; }
-        .data-modal h3 { color:var(--text-bright); font-size:13px; margin:12px 0 8px; border-bottom:1px solid var(--border-gold-dark); padding-bottom:4px; }
-        .data-tabs { display:flex; gap:8px; margin-bottom:15px; justify-content:center; }
-        .data-tab { padding:8px 20px; border:1px solid var(--border-gold); background:#2a2015; color:var(--text-secondary); cursor:pointer; border-radius:4px; font-size:12px; transition:0.2s; }
-        .data-tab.active { background:var(--accent); color:#1a140e; border-color:var(--accent); font-weight:bold; }
-        .data-tab:hover:not(.active) { border-color:var(--accent); color:var(--accent); }
-        .stat-card { background:rgba(0,0,0,0.3); border:1px solid var(--border-gold-dark); border-radius:4px; padding:12px; display:inline-block; min-width:100px; text-align:center; margin:4px; }
-        .stat-card .label { color:var(--text-secondary); font-size:10px; letter-spacing:1px; }
-        .stat-card .value { color:var(--text-bright); font-size:20px; font-weight:bold; margin-top:4px; }
-        .stat-card .sub { color:var(--accent); font-size:10px; }
-        .chart-container { background:rgba(0,0,0,0.2); border:1px solid var(--border-gold-dark); border-radius:4px; padding:15px; margin:10px 0; }
-        .chart-canvas { width:100%; height:200px; background:#1a1510; border-radius:3px; }
-        .heatmap-container { display:grid; grid-template-columns: repeat(7, 1fr); gap:3px; margin:10px 0; }
-        .heatmap-cell { aspect-ratio:1; border-radius:3px; min-width:20px; background:#2a2015; text-align:center; font-size:9px; color:var(--text-secondary); padding:4px 2px; }
-        .heatmap-cell.level1 { background:#3a2820; }
-        .heatmap-cell.level2 { background:#5a4030; }
-        .heatmap-cell.level3 { background:#7a5040; }
-        .heatmap-cell.level4 { background:#9a6050; }
-        .heatmap-cell.level5 { background:#c07060; }
-        .heatmap-label { color:var(--text-secondary); font-size:10px; text-align:center; margin-top:8px; }
-        .heatmap-row { display:flex; gap:3px; margin:2px 0; align-items:center; }
-        .heatmap-row-label { width:50px; font-size:10px; color:var(--text-secondary); text-align:right; padding-right:8px; }
-        .close-data-btn { display:block; margin:15px auto 0; padding:10px 40px; background:var(--border-gold); color:#1a140e; border:none; cursor:pointer; font-weight:bold; font-size:13px; border-radius:4px; transition:0.2s; }
-        .close-data-btn:hover { background:var(--accent); }
-        .comparison-bars { display:flex; align-items:end; gap:20px; height:150px; padding:10px 0; }
-        .compare-bar { display:flex; flex-direction:column; align-items:center; flex:1; }
-        .compare-bar .bar { width:60px; background:linear-gradient(180deg,#4a3828,#2a1810); border:1px solid var(--border-gold-dark); border-radius:4px 4px 0 0; transition:height 0.5s; }
-        .compare-bar .label { color:var(--text-secondary); font-size:10px; margin-top:6px; }
-        .compare-bar .val { color:var(--text-bright); font-size:14px; font-weight:bold; margin-bottom:4px; }
     </style>
 </head>
 <body>
@@ -146,9 +113,8 @@
             <div class="stat-item"><span class="stat-label">士气</span> <span class="stat-value" id="moraleValue">--</span></div>
         </div>
     </div>
-    <div class="top-right-corner" style="justify-content:flex-end; padding-right:10px; gap:6px;">
-        <button class="btn btn-stats" id="btnShowData">📊 数据</button>
-        <button class="btn btn-exit" id="btnExitSystem">🚪 退出</button>
+    <div class="top-right-corner" style="justify-content:flex-end; padding-right:10px;">
+        <button class="btn btn-exit" id="btnExitSystem">🚪 退出系统</button>
     </div>
 
     <div class="left-panel" id="leftPanel">
@@ -234,22 +200,6 @@
 
 <input type="file" id="imageFileInput" accept="image/*">
 <input type="file" id="backupFileInput" accept=".json">
-
-<!-- 数据展示弹窗 -->
-<div id="dataModal" style="display:none;">
-    <div class="data-modal-overlay" id="dataModalOverlay">
-        <div class="data-modal">
-            <h2>📊 学习数据中心</h2>
-            <div class="data-tabs">
-                <button class="data-tab active" data-tab="today">今日</button>
-                <button class="data-tab" data-tab="week">本周</button>
-                <button class="data-tab" data-tab="month">本月</button>
-            </div>
-            <div id="dataModalContent"></div>
-            <button class="close-data-btn" id="closeDataModal">关闭</button>
-        </div>
-    </div>
-</div>
 
 <script>
     (() => {
@@ -829,248 +779,6 @@
             document.body.insertAdjacentHTML('beforeend',html);
             document.getElementById('btnConfirmExit').addEventListener('click',()=>{ window.close(); setTimeout(()=>alert('请手动关闭标签页'),200); });
         }
-
-        // 数据展示弹窗
-        let currentDataTab = 'today';
-        document.getElementById('btnShowData').addEventListener('click', ()=>{
-            currentDataTab = 'today';
-            document.querySelectorAll('.data-tab').forEach(t=>t.classList.remove('active'));
-            document.querySelector('.data-tab[data-tab="today"]').classList.add('active');
-            renderDataModal();
-            document.getElementById('dataModal').style.display='block';
-        });
-        document.querySelectorAll('.data-tab').forEach(tab=>{
-            tab.addEventListener('click',()=>{
-                document.querySelectorAll('.data-tab').forEach(t=>t.classList.remove('active'));
-                tab.classList.add('active');
-                currentDataTab = tab.dataset.tab;
-                renderDataModal();
-            });
-        });
-        document.getElementById('closeDataModal').addEventListener('click',()=>{
-            document.getElementById('dataModal').style.display='none';
-        });
-        document.getElementById('dataModalOverlay').addEventListener('click',(e)=>{
-            if(e.target===document.getElementById('dataModalOverlay')) document.getElementById('dataModal').style.display='none';
-        });
-
-        function getStudyLogData(days) {
-            const now = new Date();
-            const logs = [];
-            for(let i=days-1;i>=0;i--){
-                const d = new Date(now);
-                d.setDate(d.getDate()-i);
-                const dayStr = d.toISOString().split('T')[0];
-                let totalMin = 0;
-                for(const entry of (studyLogs||[])){
-                    const entryDay = entry.time.split('T')[0];
-                    if(entryDay===dayStr) totalMin += (entry.hours||0)*60;
-                }
-                logs.push({date:d, dayStr, minutes:totalMin});
-            }
-            return logs;
-        }
-        function getRecentEnergy(days) {
-            const now = new Date();
-            const data = [];
-            for(let i=days-1;i>=0;i--){
-                const d = new Date(now);
-                d.setDate(d.getDate()-i);
-                data.push({date:d, value:60+Math.floor(Math.random()*30)});
-            }
-            return data;
-        }
-
-        function renderDataModal() {
-            const now = new Date();
-            let periodDays = currentDataTab==='today'?1:currentDataTab==='week'?7:30;
-            let periodLabel = currentDataTab==='today'?'今日':currentDataTab==='week'?'本周':'本月';
-
-            // 计算统计数据
-            const logs = getStudyLogData(periodDays);
-            const totalMin = logs.reduce((s,l)=>s+l.minutes,0);
-            const avgMin = periodDays>1?totalMin/periodDays:totalMin;
-            const maxDay = logs.reduce((m,l)=>l.minutes>m.minutes?l:m,logs[0]||{minutes:0});
-            const todayIdx = logs.length-1;
-            const todayMin = logs[todayIdx]?.minutes||0;
-
-            // 连续学习天数
-            let streak = 0;
-            for(let i=logs.length-1;i>=0;i--){ if(logs[i].minutes>0) streak++; else break; }
-
-            // 本周学习天数
-            const studyDays = logs.filter(l=>l.minutes>0).length;
-
-            // 上月均值
-            const lastMonthLogs = getStudyLogData(30);
-            const lastMonthAvg = lastMonthLogs.reduce((s,l)=>s+l.minutes,0)/30;
-
-            // 精力数据
-            const energyData = getRecentEnergy(periodDays);
-            const avgEnergy = energyData.reduce((s,e)=>s+e.value,0)/energyData.length;
-
-            // 生成 HTML
-            let html = `<h3>${periodLabel}数据总览</h3>`;
-            html += `<div style="display:flex;flex-wrap:wrap;justify-content:center;">`;
-            html += `<div class="stat-card"><div class="label">${periodLabel}学习</div><div class="value">${(totalMin/60).toFixed(1)}</div><div class="sub">小时</div></div>`;
-            html += `<div class="stat-card"><div class="label">日均学习</div><div class="value">${(avgMin/60).toFixed(1)}</div><div class="sub">小时</div></div>`;
-            html += `<div class="stat-card"><div class="label">连续学习</div><div class="value">${streak}</div><div class="sub">天</div></div>`;
-            html += `<div class="stat-card"><div class="label">学习天数</div><div class="value">${studyDays}</div><div class="sub">/ ${periodDays}天</div></div>`;
-            html += `<div class="stat-card"><div class="label">平均精力</div><div class="value">${Math.round(avgEnergy)}</div><div class="sub">%</div></div>`;
-            html += `</div>`;
-
-            html += `<h3>学习时间曲线（${periodLabel}）</h3>`;
-            html += `<div class="chart-container"><canvas id="chartLineCanvas" class="chart-canvas" height="180"></canvas></div>`;
-
-            html += `<h3>日均对比</h3>`;
-            html += `<div class="comparison-bars">`;
-            const maxBar = Math.max(todayMin/60, avgMin/60, lastMonthAvg/60, 1);
-            const toBar = (v)=> Math.max(10, (v/maxBar)*120);
-            html += `<div class="compare-bar"><div class="val">${(todayMin/60).toFixed(1)}h</div><div class="bar" style="height:${toBar(todayMin/60)}px;background:#3498db;"></div><div class="label">今日</div></div>`;
-            html += `<div class="compare-bar"><div class="val">${(avgMin/60).toFixed(1)}h</div><div class="bar" style="height:${toBar(avgMin/60)}px;background:#2ecc71;"></div><div class="label">${periodLabel}均</div></div>`;
-            html += `<div class="compare-bar"><div class="val">${(lastMonthAvg/60).toFixed(1)}h</div><div class="bar" style="height:${toBar(lastMonthAvg/60)}px;background:#9b59b6;"></div><div class="label">上月均</div></div>`;
-            html += `</div>`;
-
-            html += `<h3>精力趋势（${periodLabel}）</h3>`;
-            html += `<div class="chart-container"><canvas id="chartEnergyCanvas" class="chart-canvas" height="140"></canvas></div>`;
-
-            html += `<h3>月度热力图</h3>`;
-            const heatmapLogs = getStudyLogData(30);
-            const weekLabels = ['一','二','三','四','五','六','日'];
-            html += `<div style="font-size:10px;color:var(--text-secondary);text-align:center;">一 二 三 四 五 六 日</div>`;
-            const startDay = (new Date(now.getFullYear(),now.getMonth(),1).getDay()+6)%7;
-            const weeksCount = Math.ceil((startDay+30)/7);
-            for(let w=0;w<weeksCount;w++){
-                html += `<div class="heatmap-row">`;
-                html += `<div class="heatmap-row-label">第${w+1}周</div>`;
-                for(let d=0;d<7;d++){
-                    const cellIdx = w*7+d-startDay;
-                    if(cellIdx>=0 && cellIdx<30){
-                        const m = heatmapLogs[cellIdx]?.minutes||0;
-                        let level = 'level0';
-                        if(m>0 && m<30) level='level1';
-                        else if(m>=30 && m<60) level='level2';
-                        else if(m>=60 && m<120) level='level3';
-                        else if(m>=120 && m<180) level='level4';
-                        else if(m>=180) level='level5';
-                        html += `<div class="heatmap-cell ${level}">${heatmapLogs[cellIdx]?.date.getDate()||''}</div>`;
-                    } else {
-                        html += `<div class="heatmap-cell" style="background:transparent;"></div>`;
-                    }
-                }
-                html += `</div>`;
-            }
-            html += `<div class="heatmap-label" style="display:flex;justify-content:space-between;padding:0 50px;">
-                <span>少</span><span style="background:#3a2820;padding:2px 8px;border-radius:2px;"></span>
-                <span style="background:#5a4030;padding:2px 8px;border-radius:2px;"></span>
-                <span style="background:#7a5040;padding:2px 8px;border-radius:2px;"></span>
-                <span style="background:#9a6050;padding:2px 8px;border-radius:2px;"></span>
-                <span style="background:#c07060;padding:2px 8px;border-radius:2px;"></span>
-                <span>多</span>
-            </div>`;
-
-            document.getElementById('dataModalContent').innerHTML = html;
-
-            // 绘制学习时间曲线
-            setTimeout(()=>{
-                const canvas = document.getElementById('chartLineCanvas');
-                if(canvas) {
-                    const ctx2 = canvas.getContext('2d');
-                    const w = canvas.offsetWidth || 600;
-                    const h = 180;
-                    canvas.width = w;
-                    canvas.height = h;
-                    ctx2.clearRect(0,0,w,h);
-                    ctx2.fillStyle = '#1a1510';
-                    ctx2.fillRect(0,0,w,h);
-                    if(logs.length<2) return;
-                    const maxM = Math.max(...logs.map(l=>l.minutes),60);
-                    const stepX = (w-40)/Math.max(logs.length-1,1);
-                    const drawLine = (data, color)=>{
-                        ctx2.strokeStyle = color;
-                        ctx2.lineWidth = 2;
-                        ctx2.beginPath();
-                        data.forEach((v,i)=>{
-                            const x = 20 + i*stepX;
-                            const y = h-20 - (v.minutes/maxM)*(h-40);
-                            if(i===0) ctx2.moveTo(x,y);
-                            else ctx2.lineTo(x,y);
-                        });
-                        ctx2.stroke();
-                        ctx2.fillStyle = color;
-                        data.forEach((v,i)=>{
-                            const x = 20 + i*stepX;
-                            const y = h-20 - (v.minutes/maxM)*(h-40);
-                            ctx2.beginPath();
-                            ctx2.arc(x,y,4,0,Math.PI*2);
-                            ctx2.fill();
-                        });
-                    };
-                    // 背景网格
-                    ctx2.strokeStyle = '#3a3020';
-                    ctx2.lineWidth = 0.5;
-                    for(let i=0;i<5;i++){
-                        const y = h-20 - i*(h-40)/4;
-                        ctx2.beginPath(); ctx2.moveTo(20,y); ctx2.lineTo(w-20,y); ctx2.stroke();
-                    }
-                    drawLine(logs, '#d4a843');
-                    // X轴标签
-                    ctx2.fillStyle = '#a89474';
-                    ctx2.font = '10px inherit';
-                    ctx2.textAlign = 'center';
-                    const showCount = Math.min(logs.length, 7);
-                    const step = Math.floor(logs.length/showCount);
-                    logs.forEach((l,i)=>{
-                        if(i%step===0 || i===logs.length-1){
-                            const x = 20 + i*stepX;
-                            ctx2.fillText(l.dayStr.slice(5), x, h-5);
-                        }
-                    });
-                }
-
-                // 绘制精力曲线
-                const canvasE = document.getElementById('chartEnergyCanvas');
-                if(canvasE) {
-                    const ctxE = canvasE.getContext('2d');
-                    const wE = canvasE.offsetWidth || 600;
-                    const hE = 140;
-                    canvasE.width = wE;
-                    canvasE.height = hE;
-                    ctxE.clearRect(0,0,wE,hE);
-                    ctxE.fillStyle = '#1a1510';
-                    ctxE.fillRect(0,0,wE,hE);
-                    if(energyData.length<2) return;
-                    const maxE = 100;
-                    const stepX = (wE-40)/Math.max(energyData.length-1,1);
-                    ctxE.strokeStyle = '#3498db';
-                    ctxE.lineWidth = 2;
-                    ctxE.beginPath();
-                    energyData.forEach((d,i)=>{
-                        const x = 20 + i*stepX;
-                        const y = hE-20 - (d.value/maxE)*(hE-40);
-                        if(i===0) ctxE.moveTo(x,y);
-                        else ctxE.lineTo(x,y);
-                    });
-                    ctxE.stroke();
-                    ctxE.fillStyle = '#3498db';
-                    energyData.forEach((d,i)=>{
-                        const x = 20 + i*stepX;
-                        const y = hE-20 - (d.value/maxE)*(hE-40);
-                        ctxE.beginPath();
-                        ctxE.arc(x,y,4,0,Math.PI*2);
-                        ctxE.fill();
-                    });
-                    // 背景网格
-                    ctxE.strokeStyle = '#3a3020';
-                    ctxE.lineWidth = 0.5;
-                    for(let i=0;i<5;i++){
-                        const y = hE-20 - i*(hE-40)/4;
-                        ctxE.beginPath(); ctxE.moveTo(20,y); ctxE.lineTo(wE-20,y); ctxE.stroke();
-                    }
-                }
-            }, 10);
-        }
-
         btnExitSystem.addEventListener('click', async ()=>{ await saveAllData(); await exportBackup(); showSummaryModal(); });
 
         function updateCanvasSize() {
