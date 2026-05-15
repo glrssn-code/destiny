@@ -54,7 +54,11 @@
 ## 版本信息
 - **当前版本**: v2.1
 - **更新日期**: 2026-05-16
-- **Git 标签**: (待打标签)
+
+## 关联文件
+- `CHANGELOG.md` — 版本变更详细记录
+- `PROJECT_LOG.md` — 项目修改日志
+- `backups/INDEX.md` — 备份索引
 
 ## 修改日志
 
@@ -75,11 +79,15 @@
 
 ```
 e:\VSCODE\destiny\
-├── deepseek.html    # 主应用（约 1700 行）
-├── README.md        # 项目说明文档
-├── CLAUDE.md        # Claude Code 工作规则
-├── backups/         # 版本备份目录
-└── 新建文本文档.txt  # GitHub 仓库地址
+├── deepseek.html       # 主应用（约 1700 行）
+├── README.md           # 项目说明文档
+├── CLAUDE.md           # Claude Code 工作规则
+├── CHANGELOG.md        # 版本变更记录
+├── PROJECT_LOG.md      # 项目修改日志
+├── backups/            # 版本备份目录
+│   ├── INDEX.md        # 备份索引
+│   └── *_deepseek.html # 备份文件
+└── 新建文本文档.txt     # GitHub 仓库地址
 ```
 
 ---
