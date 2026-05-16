@@ -4,6 +4,19 @@
 
 ---
 
+## [v2.3] - 2026-05-16
+
+### Added
+- IndexedDB 底图持久化功能
+- 导入底图时自动保存到 IndexedDB
+- 初始化时从 IndexedDB 恢复所有区域的底图
+
+### Changed
+- 清除底图时同步清除 IndexedDB
+- 清除所有数据时同步清除 IndexedDB
+
+---
+
 ## [v2.2] - 2026-05-16
 
 ### Added

@@ -77,6 +77,23 @@
 
 ---
 
+## 2026-05-16
+
+### 操作 5：IndexedDB 底图持久化
+
+**执行时间**：12:04
+**涉及文件**：
+- `deepseek.html`（更新）
+
+**内容摘要**：
+- 新增 IndexedDB 数据库 `destiny_db`，对象存储 `bgimages`
+- 导入底图时自动保存到 IndexedDB（以 `region_索引` 为键）
+- 初始化时从 IndexedDB 恢复所有区域的底图
+- 清除底图时同步清除 IndexedDB
+- 清除所有数据时同步清除 IndexedDB
+
+---
+
 ## 规则说明
 
 ### 日志格式
